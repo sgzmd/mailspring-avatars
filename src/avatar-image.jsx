@@ -273,6 +273,18 @@ const AvatarImage = createReactClass({
             this.state.src = null;
         }
 
+        if( this.state.triedGravatar === false && ! this.state.url && this.props.email) {
+            this.state.triedGravatar = true;
+            this.getGravatarURL( this.props.email, this.props.size, this.setSrc, tryNext );
+            return;
+        }
+
+        if( this.state.triedClearbit === false && ! this.state.url && this.props.email ) {
+            this.state.triedClearbit = true;
+            this.getClearbitURL( this.props.email, this.props.size, this.setSrc, tryNext);
+            return;
+        }
+
         if( this.state.triedFacebook === false && ! this.state.url && this.props.facebookId) {
             this.state.triedFacebook = true;
             this.getFacebookURL( this.props.facebookId , this.props.size, this.setSrc, tryNext );
@@ -288,18 +300,6 @@ const AvatarImage = createReactClass({
         if( this.state.triedSkype === false && ! this.state.url && this.props.skypeId) {
             this.state.triedSkype = true;
             this.getSkypeURL( this.props.skypeId , this.props.size, this.setSrc, tryNext );
-            return;
-        }
-
-        if( this.state.triedGravatar === false && ! this.state.url && this.props.email) {
-            this.state.triedGravatar = true;
-            this.getGravatarURL( this.props.email, this.props.size, this.setSrc, tryNext );
-            return;
-        }
-
-        if( this.state.triedClearbit === false && ! this.state.url && this.props.email ) {
-            this.state.triedClearbit = true;
-            this.getClearbitURL( this.props.email, this.props.size, this.setSrc, tryNext);
             return;
         }
 
