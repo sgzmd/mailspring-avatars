@@ -40,7 +40,7 @@ const AvatarImage = createReactClass({
         size = isRetina ? size * 2 : size;
         var url = prefix + this.parse(base, { id: email, size: size });
         this.get(url, function(data) {
-            cb(prefix + this.parse(base, { id: email, size: size }));
+            cb(url);
         }, tryNext)
     },
 
@@ -67,7 +67,10 @@ const AvatarImage = createReactClass({
     getFacebookURL: function( id, size, cb, tryNext )
     {
         var base = 'graph.facebook.com/<%=id%>/picture?width=<%=size%>';
-        cb( this.getProtocol() + '//' + this.parse(base, {id: id, size: size}));
+        var url = this.getProtocol() + '//' + this.parse(base, {id: id, size: size});
+        this.get(url, function(data) {
+            cb(url);
+        }, tryNext)
     },
 
     /**
@@ -97,7 +100,10 @@ const AvatarImage = createReactClass({
     getSkypeURL: function( id, size, cb, tryNext )
     {
         var base = 'api.skype.com/users/<%=id%>/profile/avatar';
-        cb(this.getProtocol() + '//' + this.parse(base, {id: id}));
+        var url = this.getProtocol() + '//' + this.parse(base, {id: id});
+        this.get(url, function(data) {
+            cb(url);
+        }, tryNext)
     },
 
     /**
@@ -150,10 +156,13 @@ const AvatarImage = createReactClass({
      */
     get: function(url, successCb, errorCb) {
         var request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
+        request.onreadystatechange = () => {
             if (request.readyState === 4) {
                 if (request.status === 200) {
-                    var data = JSON.parse(request.responseText);
+                    var data = request.responseText;
+                    if (this.isJsonString(data)) {
+                        data = JSON.parse(data);
+                    }
                     successCb(data);
                 } else {
                     errorCb(request.status);
@@ -162,6 +171,15 @@ const AvatarImage = createReactClass({
         };
         request.open('GET', url, true);
         request.send();
+    },
+
+    isJsonString: function(str) {
+        try {
+            JSON.parse(str);
+        } catch (e) {
+            return false;
+        }
+        return true;
     },
 
     /**
