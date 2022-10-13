@@ -259,15 +259,15 @@ const AvatarImage = createReactClass({
             this.state.src = null;
         }
 
-        if( this.state.triedGravatar === false && ! this.state.url && this.props.email) {
-            this.state.triedGravatar = true;
-            this.getGravatarURL( this.props.email, this.props.size, this.setSrc, tryNext );
-            return;
-        }
-
         if( this.state.triedClearbit === false && ! this.state.url && this.props.email ) {
             this.state.triedClearbit = true;
             this.getClearbitURL( this.props.email, this.props.size, this.setSrc, tryNext);
+            return;
+        }
+
+        if( this.state.triedGravatar === false && ! this.state.url && this.props.email) {
+            this.state.triedGravatar = true;
+            this.getGravatarURL( this.props.email, this.props.size, this.setSrc, tryNext );
             return;
         }
 
