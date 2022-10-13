@@ -218,20 +218,6 @@ const AvatarImage = createReactClass({
             triedClearbit: false,
         };
     },
-    getDefaultProps: function() {
-        return {
-            fgColor: '#FFF',
-            color: null,
-            name: null,
-            value: null,
-            email: null,
-            facebookId: null,
-            skypeId: null,
-            googleId: null,
-            round: false,
-            size: 32
-        };
-    },
     // componentWillMount: function() {
     //   this.fetch();
     // },
@@ -372,4 +358,18 @@ const AvatarImage = createReactClass({
         );
     }
 });
+
+AvatarImage.defaultProps = {
+    fgColor: '#FFF',
+    color: null,
+    name: null,
+    value: null,
+    email: null,
+    facebookId: null,
+    skypeId: null,
+    googleId: null,
+    round: false,
+    size: 32
+};
+
 module.exports = AvatarImage;
