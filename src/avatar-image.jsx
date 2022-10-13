@@ -323,7 +323,8 @@ const AvatarImage = createReactClass({
             maxWidth: '100%',
             width: this.props.size,
             height: this.props.size,
-            borderRadius: (this.props.round ? 500 : 0)
+            borderRadius: (this.props.round ? 500 : 0),
+            objectFit: 'cover'
         };
 
         var initialsStyle = {
@@ -357,7 +358,8 @@ const AvatarImage = createReactClass({
             display: 'inline-block',
             width: this.props.size,
             height: this.props.size,
-            borderRadius: (this.props.round ? 500 : 0)
+            borderRadius: (this.props.round ? 500 : 0),
+            objectFit: 'cover'
         };
         var visual = this.getVisual();
 
