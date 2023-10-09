@@ -172,6 +172,7 @@ const AvatarImage = createReactClass({
         var initials = '';
         for(var i=0 ; i < parts.length ; i++)
         {
+            if (i > 3) break;
             initials += parts[i].substr(0, 1).toUpperCase();
         }
         return initials;
